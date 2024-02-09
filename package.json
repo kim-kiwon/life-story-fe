@@ -35,5 +35,10 @@
     "stylelint-config-standard": "^36.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix -c .eslintrc.js",
+    "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write",
+    "*.{scss,css}": "stylelint --fix"
   }
 }

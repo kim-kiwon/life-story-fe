@@ -2,21 +2,18 @@ module.exports = {
   extends: ['@commitlint/config-conventional'],
   parserPreset: {
     parserOpts: {
-      headerPattern: /^\[(#\d+|no\-issue)\]\s(\w+):\s(.+)$/,
-      headerCorrespondence: ['issue', 'type', 'subject'],
+      headerPattern: /^(\w+):\s(.+)$/,
+      headerCorrespondence: ['type', 'subject'],
     },
   },
   plugins: [
     {
       rules: {
         'header-match-pattern': (parsed) => {
-          const { issue, type, subject } = parsed
+          const { type, subject } = parsed
 
-          if (!issue || !type || !subject) {
-            return [
-              false,
-              'header must be in format "[#IssueNo|no-issue] type: subject" => e.g. [#1] chore: add eslint config',
-            ]
+          if (!type || !subject) {
+            return [false, 'header must be in format "type: subject" => e.g. chore: add eslint config']
           }
 
           return [true, '']

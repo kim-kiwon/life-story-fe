@@ -1,0 +1,10 @@
+**/*.scss
+**/*.scss.d.ts
+**/dist/**/*.js
+**/public/**/*.js
+babel.config.js
+.eslintrc.githook.js
+.eslintrc.js
+next.config.js
+script
+*.js

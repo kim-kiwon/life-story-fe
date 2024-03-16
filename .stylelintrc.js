@@ -1,10 +1,13 @@
-module.export = {
-  processors: ['stylelint-processor-styled-components'],
-  extends: ['stylelint-config-recommended', 'stylelint-config-styled-components'],
-  syntax: 'scss',
+module.exports = {
+  extends: 'stylelint-config-recommended',
   rules: {
     'block-no-empty': null,
-    'at-rule-no-unknown': null,
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['tailwind', 'apply', 'variants', 'responsive', 'screen'],
+      },
+    ],
     'color-hex-case': 'lower',
     'function-name-case': null,
     'declaration-colon-newline-after': null,
@@ -19,5 +22,4 @@ module.export = {
     'no-eol-whitespace': null,
     'function-parentheses-newline-inside': null,
   },
-  ignoreFiles: ['./public/**/*.css'],
 }

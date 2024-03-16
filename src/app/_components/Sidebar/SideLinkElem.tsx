@@ -1,6 +1,6 @@
-import { SidebarInfo } from '@/src/app/_components/Sidebar/Sidebar'
+import { SideLinkElemInfo } from '@/src/app/_components/Sidebar/SideLink'
 
-export default function SidebarElement({ name, link, svgPath }: SidebarInfo) {
+export default function SideLinkElem({ name, link, svgPath }: SideLinkElemInfo) {
   return (
     <li>
       <a

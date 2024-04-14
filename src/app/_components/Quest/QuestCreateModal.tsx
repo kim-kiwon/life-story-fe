@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 
 interface QuestBoxProps {
-  handleAddQuest: (title: string, content: string) => void
+  handleAddQuest: (type: string, title: string, content: string) => void
   handleCloseCreateQuest: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleCloseCreateQuest }) => {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
+  const [type, setType] = useState<string>('기본')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (title.trim() !== '' && content.trim() !== '') {
-      handleAddQuest(title, content)
+      handleAddQuest(type, title, content)
+      setType('기본')
       setTitle('')
       setContent('')
     }
@@ -51,8 +53,37 @@ const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleClose
           <div className="p-4 md:p-5">
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
+                <label htmlFor="questType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  타입
+                </label>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    id="default"
+                    name="questType"
+                    value="default"
+                    checked={type === '기본'}
+                    onChange={() => setType('기본')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="daily" className="mr-4">
+                    기본
+                  </label>
+                  <input
+                    type="radio"
+                    id="repeat"
+                    name="questType"
+                    value="repeat"
+                    checked={type === '반복'}
+                    onChange={() => setType('반복')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="weekly">반복</label>
+                </div>
+              </div>
+              <div>
                 <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  퀘스트 내용
+                  제목
                 </label>
                 <input
                   type="text"

@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 
 interface QuestBoxProps {
-  handleAddQuest: (type: string, title: string, content: string) => void
+  handleAddQuest: (repetition: string, type: string, title: string, content: string) => void
   handleCloseCreateQuest: React.MouseEventHandler<HTMLButtonElement>
 }
 
+const TYPE_DEFAULT_VALUE = '기본'
+const REPETITION_DEFAULT_VALUE = '일일'
+
 const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleCloseCreateQuest }) => {
+  const [repetition, setRepetition] = useState<string>('기본')
+  const [type, setType] = useState<string>('일일')
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
-  const [type, setType] = useState<string>('기본')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (title.trim() !== '' && content.trim() !== '') {
-      handleAddQuest(type, title, content)
-      setType('기본')
+      handleAddQuest(type, repetition, title, content)
+      setType(TYPE_DEFAULT_VALUE)
+      setRepetition(REPETITION_DEFAULT_VALUE)
       setTitle('')
       setContent('')
     }
@@ -52,16 +57,15 @@ const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleClose
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="questType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  타입
+                  반복 설정
                 </label>
                 <div className="flex items-center">
                   <input
                     type="radio"
-                    id="default"
-                    name="questType"
+                    name="repetition"
                     value="default"
-                    checked={type === '기본'}
-                    onChange={() => setType('기본')}
+                    checked={repetition === '기본'}
+                    onChange={() => setRepetition('기본')}
                     className="mr-2"
                   />
                   <label htmlFor="daily" className="mr-4">
@@ -69,14 +73,62 @@ const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleClose
                   </label>
                   <input
                     type="radio"
-                    id="repeat"
-                    name="questType"
+                    name="repeat"
                     value="repeat"
-                    checked={type === '반복'}
-                    onChange={() => setType('반복')}
+                    checked={repetition === '반복'}
+                    onChange={() => setRepetition('반복')}
                     className="mr-2"
                   />
                   <label htmlFor="weekly">반복</label>
+                </div>
+              </div>
+              <div>
+                <label htmlFor="questType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  타입
+                </label>
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    name="questType"
+                    value="daily"
+                    checked={type === '일일'}
+                    onChange={() => setType('일일')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="daily" className="mr-4">
+                    일일
+                  </label>
+                  <input
+                    type="radio"
+                    name="questType"
+                    value="weekly"
+                    checked={type === '주간'}
+                    onChange={() => setType('주간')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="daily" className="mr-4">
+                    주간
+                  </label>
+                  <input
+                    type="radio"
+                    name="questType"
+                    value="monthly"
+                    checked={type === '월간'}
+                    onChange={() => setType('월간')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="monthly" className="mr-4">
+                    월간
+                  </label>
+                  <input
+                    type="radio"
+                    name="questType"
+                    value="etc"
+                    checked={type === '기타'}
+                    onChange={() => setType('기타')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="etc">기타</label>
                 </div>
               </div>
               <div>

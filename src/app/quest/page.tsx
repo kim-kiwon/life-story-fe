@@ -7,14 +7,12 @@ import QuestCreateButton from '@/src/app/_components/Quest/QuestCreateButton'
 import QuestCreateModal from '@/src/app/_components/Quest/QuestCreateModal'
 
 const QuestPage: React.FC = () => {
-  const [quests, setQuests] = useState<{ type: string; title: string; content: string }[]>([])
-  // const [newQuestTitle, setNewQuestTitle] = useState<string>('')
-  // const [newQuestContext, setNewQuestContext] = useState<string>('')
+  const [quests, setQuests] = useState<{ repetition: string; type: string; title: string; content: string }[]>([])
   const [showCreateQuestModal, setShowCreateQuestModal] = useState<boolean>(false)
 
-  const handleAddQuest = (type: string, title: string, content: string) => {
+  const handleAddQuest = (repetition: string, type: string, title: string, content: string) => {
     if (title.trim() !== '' && content.trim() !== '') {
-      setQuests([...quests, { type, title, content }])
+      setQuests([...quests, { repetition, type, title, content }])
       setShowCreateQuestModal(false)
     }
   }
@@ -37,7 +35,13 @@ const QuestPage: React.FC = () => {
         )}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {quests.map((quest, index) => (
-            <QuestBox key={index} type={quest.type} title={quest.title} context={quest.content} />
+            <QuestBox
+              key={index}
+              repetition={quest.repetition}
+              type={quest.type}
+              title={quest.title}
+              context={quest.content}
+            />
           ))}
         </div>
       </div>

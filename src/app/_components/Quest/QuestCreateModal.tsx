@@ -22,7 +22,6 @@ const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleClose
 
   return (
     <div
-      id="authentication-modal"
       aria-hidden="true"
       className="ml-64 overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="relative p-4 w-full max-w-md max-h-full">
@@ -32,7 +31,6 @@ const QuestCreateModal: React.FC<QuestBoxProps> = ({ handleAddQuest, handleClose
             <button
               type="button"
               className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-              data-modal-hide="authentication-modal"
               onClick={handleCloseCreateQuest}>
               <svg
                 className="w-3 h-3"

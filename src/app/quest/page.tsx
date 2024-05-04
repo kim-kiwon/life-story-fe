@@ -7,12 +7,15 @@ import QuestCreateButton from '@/src/app/_components/Quest/QuestCreateButton'
 import QuestCreateModal from '@/src/app/_components/Quest/QuestCreateModal'
 
 const QuestPage: React.FC = () => {
-  const [quests, setQuests] = useState<{ repetition: string; type: string; title: string; content: string }[]>([])
+  const [quests, setQuests] = useState<
+    { isCompleted: boolean; repetition: string; type: string; title: string; content: string }[]
+  >([])
   const [showCreateQuestModal, setShowCreateQuestModal] = useState<boolean>(false)
 
   const handleAddQuest = (repetition: string, type: string, title: string, content: string) => {
     if (title.trim() !== '' && content.trim() !== '') {
-      setQuests([...quests, { repetition, type, title, content }])
+      const isCompleted = false
+      setQuests([...quests, { isCompleted, repetition, type, title, content }])
       setShowCreateQuestModal(false)
     }
   }
@@ -37,6 +40,7 @@ const QuestPage: React.FC = () => {
           {quests.map((quest, index) => (
             <QuestBox
               key={index}
+              isCompleted={quest.isCompleted}
               repetition={quest.repetition}
               type={quest.type}
               title={quest.title}
